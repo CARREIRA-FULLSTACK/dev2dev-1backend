@@ -2,7 +2,9 @@ const Post = require("../models/Post");
 
 class PostController {
   async store(req, res) {
-    console.log("POST CONTROLLER");
+    const insertedPost = await Post.create(req.body);
+
+    return res.status(200).json(insertedPost);
   }
 }
 
