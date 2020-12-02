@@ -3,13 +3,13 @@ const PostController = require("./apps/controllers/PostController");
 
 const multer = require("multer");
 
-const { uuid } = require("uuidv4");
+const { v4 } = require("uuid");
 
 const upload = multer({
   storage: multer.diskStorage({
     destination: "uploads/",
     filename(req, file, callback) {
-      const fileName = `${uuid()}-${file.originalname}`;
+      const fileName = `${v4()}-${file.originalname}`;
 
       return callback(null, fileName);
     },
