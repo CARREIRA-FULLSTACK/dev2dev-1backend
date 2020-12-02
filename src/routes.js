@@ -22,12 +22,6 @@ routes.get("/health", (req, res) => {
   res.send({ status: "Connect success!" });
 });
 
-routes.post("/post", PostController.store);
-
-routes.post("/avatar", upload.single("avatar"), function (req, res) {
-  const { filename, size } = req.file;
-
-  return res.send({ image: `/uploads/${filename}`, size });
-});
+routes.post("/post", upload.single("avatar"), PostController.store);
 
 module.exports = routes;
