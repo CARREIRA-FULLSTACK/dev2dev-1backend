@@ -4,7 +4,19 @@ class PostController {
   async store(req, res) {
     const insertedPost = await Post.create(req.body);
 
-    return res.status(200).json(insertedPost);
+    const formattedPosts = {
+      id: insertedPost.id,
+      avatar: "https://cdn.quasar.dev/img/avatar.png",
+      name: "Daniel",
+      time: insertedPost.createdAt,
+      text: insertedPost.text,
+      url: insertedPost.picture,
+      likes: 169,
+      comments: 6,
+      shareds: 4,
+    };
+
+    return res.status(200).json(formattedPosts);
   }
 
   async upload(req, res) {
@@ -20,7 +32,23 @@ class PostController {
       return res.send({ message: "Posts not found" });
     }
 
-    return res.status(200).json(allPosts);
+    const formattedPosts = [];
+
+    allPosts.forEach((element) => {
+      formattedPosts.push({
+        id: element.id,
+        avatar: "https://cdn.quasar.dev/img/avatar.png",
+        name: "Daniel",
+        time: element.createdAt,
+        text: element.text,
+        url: element.picture,
+        likes: 169,
+        comments: 6,
+        shareds: 4,
+      });
+    });
+
+    return res.status(200).json(formattedPosts);
   }
 }
 
